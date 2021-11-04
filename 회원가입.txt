@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+   <title>member_register</title>
+   <meta charset="UTF-8">
+  </head>
+  <body>
+
+    <h1>회원가입</h1><!-- 헤더 -->
+     <form action="member_register.php" method="POST">                                      <form action="member_register.php" method="POST">
+       <label for="fname">회원이름:</label><br>                                                          회원이름<input type="text" name="u_name_box"><br>
+       <input type="text" id="fname" name="fname"><br>                                               핸폰<input type="text" name="u_phone_box"><br>               ======>name구분
+       <label for="lname">휴대전화:</label><br>                                                           주소<input type="text" name="u_addr_box"><br>
+       <input type="number" id="lname" name="lname"><br>                                           이메일<input type="text" name="u_email_box"><br>
+                                                                                                                        주민번호뒷자리<input type="text" name="u_personal_box"><br>
+       <label for="fname">주소:</label><br>                                                                 국외여행여부<input type="text" name="u_travel_box"><br>
+       <input type="text" id="fname" name="fname"><br>
+       <label for="fname">이메일주소:</label><br>
+       <input type="text" id="fname" name="fname"><br>
+       <label for="fname">주민등록번호 뒷자리:</label><br>
+       <input type="number" id="fname" name="fname"><br>
+       14일 이내 국외여행여부<input type="radio"<br><br><br>
+       <input type="submit" value="회원가입">
+      </form>
+    <h6>H.S. Corp</h6><!-- 숫자가 클수록 크기 작아짐 ->
+     
+    <p></p>
+
+   </body>
+</html>
+

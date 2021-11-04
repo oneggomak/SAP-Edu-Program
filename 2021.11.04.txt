@@ -1,0 +1,158 @@
+Q.
+1. member_register.html 과 member_register.php를 작동시키기 위한 데이터저장소를 만든다. (database and table)
+2. 데이터베이스의 이름은"member_db" , 테이블의 이름은 "member_t" 이다.
+3.membe_t 테이블에 들어갈 데이터들은 6가지이고, 각각의 타입은 아래와 같다.
+
+   회원이름 : 문자열 : 20글자까지 저장가능.
+   핸폰 : 문자열 :15글자까지 저장가능.
+   주소 : 문자열 : 50글자까지 저장가능
+   이메일 : 문자열 : 50글자까지 저장가능
+   주민번호뒷자리 : 숫자 : int말고 가장작은 숫자형태가 있음. 찾아라  (!!!값의 쓰임에 맞는 글자 크기 범위의 명령어를 쓴다. - mysql field type -> 11.1 Numeric Data Types 들어가서 찾아봐라)
+   국외여행여부 : Boolean 형태 : True/False (실제로는 숫자(0)과 (1)로 저장됨.) -----------------------!!!!!!!
+
+=======================================================================================
+Microsoft Windows [Version 10.0.19041.1288]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP450G2>cd c:\
+
+c:\>cd xampp;
+지정된 경로를 찾을 수 없습니다.
+
+c:\>cd xampp
+
+c:\xampp>cd mysql
+
+c:\xampp\mysql>cd bin
+
+c:\xampp\mysql\bin>mysql -u root -h localhost -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 43
+Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [(none)]> create database;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [(none)]> create database member_db;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| member_db          |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| temp_db            |
+| test               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use member_db;
+Database changed
+
+MariaDB [member_db]> create table member_t (u_name char(20), u_phone char(15), u_addr varchar(50), u_email varchar(50), u_personal_id mediumint, u_travel tinyint(1));
+Query OK, 0 rows affected (0.284 sec)
+                ---------> char <-비교-> varchar : https://m.blog.naver.com/darkxpavmffj/90089405466
+                ------------------>> 값의 쓰임에 맞는 글자 크기 범위의 명령어를 쓴다. - mysql field type -> 11.1 Numeric Data Types 들어가서 찾아봐라 : 주민번호 mediumint가 적당하다
+                                          *tinyint : TRUE는 1, FALSE는 0 으로 저장된다.
+MariaDB [member_db]> desc member_t;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| u_name        | char(20)     | YES  |     | NULL    |       |
+| u_phone       | char(15)     | YES  |     | NULL    |       |
+| u_addr        | varchar(50)  | YES  |     | NULL    |       |
+| u_email       | varchar(50)  | YES  |     | NULL    |       |
+| u_personal_id | mediumint(9) | YES  |     | NULL    |       |
+| u_travel      | tinyint(1)   | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.017 sec)
+
+MariaDB [member_db]> ALTER TABLE member_t MODIFY u_name char(20) PRIMARY KEY;
+Query OK, 0 rows affected (0.206 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [member_db]> desc member_t;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| u_name        | char(20)     | NO   | PRI | NULL    |       |
+| u_phone       | char(15)     | YES  |     | NULL    |       |
+| u_addr        | varchar(50)  | YES  |     | NULL    |       |
+| u_email       | varchar(50)  | YES  |     | NULL    |       |
+| u_personal_id | mediumint(9) | YES  |     | NULL    |       |
+| u_travel      | tinyint(1)   | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+
+MariaDB [member_db]> desc member_t;
++---------------+--------------+------+-----+---------+-------+
+| Field         | Type         | Null | Key | Default | Extra |
++---------------+--------------+------+-----+---------+-------+
+| u_name        | char(20)     | NO   | PRI | NULL    |       |
+| u_phone       | char(15)     | YES  |     | NULL    |       |
+| u_addr        | varchar(50)  | YES  |     | NULL    |       |
+| u_email       | varchar(50)  | YES  |     | NULL    |       |
+| u_personal_id | mediumint(9) | YES  |     | NULL    |       |
+| u_travel      | tinyint(1)   | YES  |     | NULL    |       |
++---------------+--------------+------+-----+---------+-------+
+6 rows in set (0.187 sec)
+
+MariaDB [member_db]> insert into member_t (u_name, u_phone, u_addr, u_email, u_personal_id, u_travel) values
+    -> ('yongmin', '010-8593-9803', 'jeju', 'aaa@aaa.com', 1111111, 0),
+    -> ('jihoon', '010-4829-4779', 'seoul', 'bbb@bbb.com', 2222222, 1),
+    -> ('hyeongseop', '010-9205-0909', 'suwon', 'ccc@ccc.com', 3333333, 0);
+Query OK, 3 rows affected (0.017 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [member_db]> select * from member_t;
++------------+---------------+--------+-------------+---------------+----------+
+| u_name     | u_phone       | u_addr | u_email     | u_personal_id | u_travel |
++------------+---------------+--------+-------------+---------------+----------+
+| hyeongseop | 010-9205-0909 | suwon  | ccc@ccc.com |       3333333 |        0 |
+| jihoon     | 010-4829-4779 | seoul  | bbb@bbb.com |       2222222 |        1 |
+| yongmin    | 010-8593-9803 | jeju   | aaa@aaa.com |       1111111 |        0 |
++------------+---------------+--------+-------------+---------------+----------+
+3 rows in set (0.001 sec)
+
+MariaDB [(none)]> SELCET * FROM member_t;   =========> !!!!!! DB 먼저 찾고 그 다음에 테이블 찾기
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELCET * FROM member_t' at line 1
+MariaDB [(none)]> use member_t;
+ERROR 1049 (42000): Unknown database 'member_t'
+MariaDB [(none)]> use member_db;
+Database changed
+MariaDB [member_db]> SELCET * FROM member_t;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'SELCET * FROM member_t' at line 1
+MariaDB [member_db]> SELECT * FROM member_t;
++------------+---------------+--------+-------------+---------------+----------+
+| u_name     | u_phone       | u_addr | u_email     | u_personal_id | u_travel |
++------------+---------------+--------+-------------+---------------+----------+
+| hyeongseop | 010-9205-0909 | suwon  | ccc@ccc.com |       3333333 |        0 |
+| jihoon     | 010-4829-4779 | seoul  | bbb@bbb.com |       2222222 |        1 |
+| yongmin    | 010-8593-9803 | jeju   | aaa@aaa.com |       1111111 |        0 |
++------------+---------------+--------+-------------+---------------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [member_db]> select * from member_t where u_name LIKE '%h%';     ---------> !!! 사람이름 중에 어느 위치인진 모르지만 'h'가 들어가는 애를 찾아주라
++------------+---------------+--------+-------------+---------------+----------+
+| u_name     | u_phone       | u_addr | u_email     | u_personal_id | u_travel |
++------------+---------------+--------+-------------+---------------+----------+
+| hyeongseop | 010-9205-0909 | suwon  | ccc@ccc.com |       3333333 |        0 |
+| jihoon     | 010-4829-4779 | seoul  | bbb@bbb.com |       2222222 |        1 |
++------------+---------------+--------+-------------+----------
+
+
+
+==============================================================================================
+
+
+

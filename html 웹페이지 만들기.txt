@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>HyperLink and Images</title>
+
+</head>
+<body>
+  <?php
+     $data = 12345;
+     echo("데이터는". $data);    -------------------------------------------> (,)아니고 (.)사용
+     echo("<font size=7>데이터는?"</font>". $data. "입니다");    
+     
+
+    echo("<font size=7>보여?"</font>");
+    echo("<font color=blue>보여?</font>");
+    echo("<hr size=5>");
+  ?>
+<h1>HyperLink and Images</h1>
+       <a href="www.naver.com">NAVER</a>
+       <img src="img _panini.jpg" width="500" height="333">
+
+<p></p>
+
+</body>
+</html>

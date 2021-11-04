@@ -1,0 +1,85 @@
+1. 클라우드
+   1) IaaS : 골격
+              네트워크 케이블,랜선(UTP/STP) -> 허브/스위치/라우터 -> 컴퓨터(PC/SERVER)
+              전력장치(무정전전원공급장치:UPS) -> 비상발전기
+              연결장치(네트워크장비들을 연결해주는 중간장비들) : 아웃렛, 젠더
+   2) Pass :  전력
+              운영체제(Windows7/10, 리눅스, 유닉스)
+              TCP/IP네트워크 소프트웨어 - 운영체제가 담당하는 파트(통신기능: 서로다른 하드웨어/소프트웨어끼리 규약을 정함.
+              IP(운송경로) -> TCP/UDP(운송방법) -> HTTP/FTP/DNS(운송물건)
+              물건(데이터)의 종류 : HTTP(Hyper Text Transfer Protocol) - 웹서비스가 사용하는 프로토콜
+              URL을 사용할 때 맨 앞에 'http://' 라고 적는 것도 그런 이유임.
+              
+
+   3) SaaS :  인테리어, 가구, 조명
+               
+2. 웹서비스
+   1) 웹서버 : 웹페이지를 서비스해준다.
+                 - Apache Web Server(확장성 good)
+                   *백엔드개발자 : 데이터베이스와 웹서버를 연결해서 데이터를 처리하는 기능을 제작.
+                   *프론트엔드개발자 : 웹브라우저에 보여지는 컨텐츠의 내용을 디자인함.
+                   *풀스택개발자 : 백엔드+프론트엔드
+                   *웹서버(Apache) <-> 프로그래밍(PHP, asp, python, java, node-js) <-> 데이터베이스(MariaDB) + Linux + Windows : 각각의 역할은 다르나 연계되어있음. => 풀스택
+                   *개발 플랫폼 : WAMP(윈도우 기반), LAMP(리눅스 기반)
+                   Q.어떻게 웹서버에 접속을 해야하는가? http:// 접속할곳 / 원하는 콘텐츠 (http://192.168.0.88 -> 페이지 입력 안 하면 기본페이지(홈페이지)를 보낸다.) *w3school 사이트 참조
+                   Q.어디에 웹페이지를 넣어야 접속할 수 있는가? C:\xampp\htdocs
+                   Q.거기에 웹페이지를 임의로 제작해서 넣어보시오. 
+                   Q.CSS효과를 만든 페이지에 적용하라. - HTML페이지 안에 넣을 수도 있고, 파일로도 만들 수 있음.
+                 - Nginx(속도 good)
+   2) 웹페이지 : 정보를 클라이언트에게 보여주는 것. 
+                    *코딩 : 데이터를 처리하기 위해서 로직을 만드는 것.
+                    - 대표적 프로그래밍 언어 : C언어, Python
+                    - 프로그래밍 언어의 기본 골격 : 데이터 저장, 계산, 출력, 입력 ex) 저장 (a=200), 계산 (c=a+30), 출력 (print(c))
+                                                          : 흐름이 위에서 아래로 진행된다.(모든 언어 공통)
+                                                          : 흐름을 바꾸는 두가지 경우(반복, 분기형태) ex) 반복형태(for/while), 분기형태(if/switch)
+                                                            
+   3) 웹브라우저 : 클라이언트 서비스. 웹페이지를 요청받고 해석해서 우리에게 보여줌.
+
+3. 네트워크 :  TCP/IP네트워크 소프트웨어(운영체제에 포함되어 있음)                                 
+                 실습 - CMD창에서 네트워크 명령어 사용해보기 *ping : 신호를 주고받음. *ip확인방법 : ipconfig(명령어)
+                          신호의 발신지, 목적지 필요
+                          목적지 1) 숫자형 : IP ADdress
+                                   2) 글자형 : Domain Name
+                                                                                                                      저장   검색   수정   삭제
+4. 데이터베이스 : 데이터가 많은 요즘 시대에 정보를 저장했다가 빨리 검색할 수 있게 함. *CRUD(Create,Read,Update,Delete) : 기본적인 데이터 처리기능.
+                      전용 제어 언어가 있음.(SQL)                                                                |        |
+                      오라클(Oracle) - 대형데이터베이스(대기업용)                                        INSERT SELECT
+                      MySQL(MariaDB)  - 중소형
+                      SQLite - 초소형모바일 : 스마트폰에 장착되어있음. 파일형 데이터베이스(접속형X), 액셀 비슷함.
+                      
+                      1) 폴더(databases) -> 파일(table) -> 데이터(data)
+                      2) 새로운 폴더(databases)를 생성.(테스트용) - create database temp_db;
+                      3) 잘 만들어졌나 확인 - show databases;
+                      3) 작업폴더로 진입 - use temp_db;
+                      4) 파일이 한 개도 없기 때문에, 새로운 파일(table)을 만들어 준다. 이 파일이 어떤 데이터들이 저장될 수 있는지를 적어준다.(테이블설계)
+                         회원정보 저장한다고 생각하고 작업할 것임.
+                         - 이름(u_name) : 타입(글자들)->String
+                         - 주소(u_addr) : 타입(글자들) -> String
+                         - 휴대폰 번호(u_phone) 타입(숫자)->Numeric [ int(eger), float(ing point)]
+
+                         create table temp_t(u_name char(100), u_addr(100), u_phone int)
+                      *프롬프트에서 오타 발생 시 빠져나오는 법  : ';' 찍고 엔터
+
+192.168.0.88
+192.168.2.179
+
+@프롬프트 DB작성
+*휴대폰번호는 백억단위다. 이건 integer 범위를 벗어남. 크리티컬! / integer범위는 -2147283648 ~ 2147283648)
+ -> 어떻게 고치나? ALTER 라는 명령어를 사용해서 특정 필드(컬럼)를 고친다. -> ALTER를 사용해서 u_phone의 타입을 글자로 바꿔라 -> String 타입
+                                                                                                       -> ALTER TABLE temp_t MODIFY u_phone varchar(20);
+                                                                                                           *u_phone 칸을 varchar(50) 이라는 타입으로 변경
+                                                                                                            var(iable) chr(acters)이 약자.
+                                                                                                            일명 다이나믹 문자열(크기에 따라 줄어든다.)
+                                                                                                             
+*특정 데이터 삭제 : DELETE FROM temp_t ...... -> DELETE FROM temp_t WHERE u_name='kim';
+*특정 데이터 수정 : UPDATE temp_t SET 원본=수정 -> UPDATE temp_t SET u_phone=01077776666
+                                                                           WHERE u_name='kim';
+*확장명령어(조건절)-> WHERE 이름='KIM'  
+*ALTER TABLE temp_t MODIFY u_phone varchar(20) not null; -> 입력값이 없으면 안되게 설정
+*PRIMARY KEY : not null & unique 제약한다. 당연히 값이 있어야 비교가 가능하기 때문에
+ 
+
+
+
+
+*웹브라우저는 java, html, css 이외에 해석 불가.

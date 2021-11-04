@@ -1,0 +1,282 @@
+Microsoft Windows [Version 10.0.19041.1288]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\HP450G2>create databases
+'create'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\Users\HP450G2>mysql -u root -p
+'mysql'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+C:\Users\HP450G2>cd c:\
+
+c:\>cd xampp
+
+c:\xampp>cd bin
+지정된 경로를 찾을 수 없습니다.
+
+c:\xampp>cd mysql
+
+c:\xampp\mysql>cd bin
+
+c:\xampp\mysql\bin>my sql -u root p
+'my'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는         
+배치 파일이 아닙니다.
+
+c:\xampp\mysql\bin>my sql -u localhost -p
+'my'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는            
+배치 파일이 아닙니다.
+
+c:\xampp\mysql\bin>-u -h localhost -p
+'-u'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+c:\xampp\mysql\bin>-u localhost -h -p
+'-u'은(는) 내부 또는 외부 명령, 실행할 수 있는 프로그램, 또는
+배치 파일이 아닙니다.
+
+c:\xampp\mysql\bin>mysql -u localhost -h -p                                  -----------> mysql이 있는 위치로 들어가서 접속   ??근데 왜 bin으로 들어가지?
+ERROR 2005 (HY000): Unknown MySQL server host '-p' (11001)                 
+
+c:\xampp\mysql\bin>
+c:\xampp\mysql\bin>mysql -u -h localhost -p
+Enter password:
+ERROR 1045 (28000): Access denied for user '-h'@'localhost' (using password: NO)
+
+c:\xampp\mysql\bin>mysql -u -h localhost -p
+Enter password: **
+ERROR 1045 (28000): Access denied for user '-h'@'localhost' (using password: YES)
+
+c:\xampp\mysql\bin>mysql -u root -p                                      --------------------> 비밀번호 몰라서 그냥 엔터 키 누름
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 24
+Server version: 10.4.21-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create databases      ---------> error
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databases' at line 1
+MariaDB [(none)]> create databases temp_db;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databases temp_db' at line 1
+MariaDB [(none)]> create database temp_db;  --------> 새로운 폴더(databases)생성
+Query OK, 1 row affected (0.003 sec)
+
+MariaDB [(none)]> show database;   
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database' at line 1
+MariaDB [(none)]> show databases;         --------------------- > 생성 확인
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| temp_db            |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> use temp_db;     --------------> 작업폴더로 진입
+Database changed
+MariaDB [temp_db]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [temp_db]> create table temp_t (u_name char(100), u_addr char(100), u_phone int);    ---------------> 파일 생성(테이블 설계)
+Query OK, 0 rows affected (0.110 sec)
+
+MariaDB [temp_db]> show tables;
++-------------------+
+| Tables_in_temp_db |
++-------------------+
+| temp_t            |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [temp_db]> describe temp_t      --------------> 테이블 확인
+    -> ;
++---------+-----------+------+-----+---------+-------+
+| Field   | Type      | Null | Key | Default | Extra |
++---------+-----------+------+-----+---------+-------+
+| u_name  | char(100) | YES  |     | NULL    |       |
+| u_addr  | char(100) | YES  |     | NULL    |       |
+| u_phone | int(11)   | YES  |     | NULL    |       |
++---------+-----------+------+-----+---------+-------+
+3 rows in set (0.016 sec)
+
+MariaDB [temp_db]> describe temp_t;
++---------+-----------+------+-----+---------+-------+
+| Field   | Type      | Null | Key | Default | Extra |
++---------+-----------+------+-----+---------+-------+
+| u_name  | char(100) | YES  |     | NULL    |       |
+| u_addr  | char(100) | YES  |     | NULL    |       |
+| u_phone | int(11)   | YES  |     | NULL    |       |
++---------+-----------+------+-----+---------+-------+
+3 rows in set (0.187 sec)
+
+MariaDB [temp_db]> INSERT INTO temp_t (u_name, u_addr, u_phone) -> VALUES ('kim', 'seoul', 01012347777);   ------------------> 엔터치고 줄 바꿔서 VALUES 명령어 입력
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-> VALUES ('kim', 'seoul', 01012347777)' at line 1
+MariaDB [temp_db]> INSERT INTO temp_t (u_name,u_addr,u_phone) -> VALUES ('kim','seoul',01012347777);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '-> VALUES ('kim','seoul',01012347777)' at line 1
+MariaDB [temp_db]> INSERT INTO temp_t (u_name,u_addr,u_phone)
+    -> VALUES ('kim','seoul',01012347777);
+Query OK, 1 row affected (0.011 sec)
+
+MariaDB [temp_db]> INSERT INTO temp_t (u_name,u_addr,u_phone)
+    -> VALUES ('park',''newyork',01099998777);
+    '> ;
+    '> ;
+    '> ;;
+    '> ;;
+    '> ;
+    '> ;
+    '> ;;;;;
+    '> VALUES ('park','newyork',01099998777);
+    '> ;
+    '> ;
+    '> ;;
+    '> '
+    -> '
+    '> ;
+    '> ;
+    '> '                ------------------> (')먼저 지우고나서 (;) 누르고 에러 탈출
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'newyork',01099998777);
+;
+;
+;;
+;;
+;
+;
+;;;;;
+VALUES ('park','newyork',010999987...' at line 2
+MariaDB [temp_db]> INSERT INTO temp_t (u_name,u_addr,u_phone)
+    -> VALUES ('park','newyork',01099998777);
+Query OK, 1 row affected (0.024 sec)
+
+MariaDB [temp_db]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| temp_db            |
+| test               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [temp_db]> select * from temp_t;    ---------------> 테이블 생성확인
++--------+---------+------------+
+| u_name | u_addr  | u_phone    |
++--------+---------+------------+
+| kim    | seoul   | 1012347777 |
+| park   | newyork | 1099998777 |
++--------+---------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [temp_db]> DELETE FROM temp_t     -----------------> 삭제 
+    -> WHERE u_name='kim';                       -----------------> 조건
+Query OK, 1 row affected (0.186 sec)
+
+MariaDB [temp_db]> select * from temp_t;
++--------+---------+------------+
+| u_name | u_addr  | u_phone    |
++--------+---------+------------+
+| park   | newyork | 1099998777 |
++--------+---------+------------+
+1 row in set (0.000 sec)
+
+MariaDB [temp_db]> INSERT INTO temp_t(u_name,u_addr,u_phone)
+    -> VALUES ('shin','suwon',01012345678);
+Query OK, 1 row affected (0.017 sec)
+
+MariaDB [temp_db]> select * from temp_t;
++--------+---------+------------+
+| u_name | u_addr  | u_phone    |
++--------+---------+------------+
+| park   | newyork | 1099998777 |
+| shin   | suwon   | 1012345678 |
++--------+---------+------------+
+2 rows in set (0.000 sec)
+MariaDB [temp_db]> UPDATE temp_t SET u_phone=01009876543    --------------------> 수정
+    -> WHERE u_name='shin';
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+ERROR 2002 (HY000): Can't connect to MySQL server on 'localhost' (10061)
+ERROR: Can't connect to the server
+
+unknown [temp_db]> UPDATE temp_t SET u_phone=01009876543
+    ->  WHERE u_name='shin';
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: temp_db
+
+Query OK, 1 row affected (0.019 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [temp_db]> select * from temp_t;
++--------+---------+------------+
+| u_name | u_addr  | u_phone    |
++--------+---------+------------+
+| park   | newyork | 1099998777 |
+| shin   | suwon   | 1009876543 |
++--------+---------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [temp_db]> ALTER TABLE temp_t MODIFY u_phone varchar(20) not null;    -----------------------> 숫자를 문자로 변경(값의 범위 변경 위해), null값 설정
+Query OK, 2 rows affected (0.338 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [temp_db]> describe temp_t;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| u_name  | char(100)   | YES  |     | NULL    |       |
+| u_addr  | char(100)   | YES  |     | NULL    |       |
+| u_phone | varchar(20) | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.026 sec)
+
+MariaDB [temp_db]> ALTER TABLE customer ADD PRIMARY KEY (sid);       ------------------> key 설정(중복X)
+ERROR 1146 (42S02): Table 'temp_db.customer' doesn't exist
+MariaDB [temp_db]>
+MariaDB [temp_db]> ALTER TABLE temp_t ADD PRIMARY KEY (u_name);
+Query OK, 0 rows affected (0.219 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [temp_db]> ALTER TABLE temp_t MODIFY u_phone varchar(20) PRIMARY KEY;    **** ADD : 여러개에 키 설정 가능 <-> MODIFY
+ERROR 1068 (42000): Multiple primary key defined
+MariaDB [temp_db]> INSERT INTO temp_t(u_name,u_addr,u_phone) VALUES
+    -> ('aaa','seoul','010-2345-9765'),
+    -> ('bbb','daegu','010-2398-0298'),
+    -> ('ccc','jeju','010-8796-2095');
+Query OK, 3 rows affected (0.185 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+MariaDB [temp_db]> describe temp_t;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| u_name  | char(100)   | NO   | PRI | NULL    |       |
+| u_addr  | char(100)   | YES  |     | NULL    |       |
+| u_phone | varchar(20) | NO   |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+3 rows in set (0.013 sec)
+
+MariaDB [temp_db]> select * from temp_t;
++--------+---------+---------------+
+| u_name | u_addr  | u_phone       |
++--------+---------+---------------+
+| aaa    | seoul   | 010-2345-9765 |
+| bbb    | daegu   | 010-2398-0298 |
+| ccc    | jeju    | 010-8796-2095 |
+| park   | newyork | 1099998777    |
+| shin   | suwon   | 1009876543    |
++--------+---------+---------------+
+5 rows in set (0.000 sec)
